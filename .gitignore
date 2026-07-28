@@ -10,9 +10,9 @@ env/
 # Environment variables
 .env
 
-# Local database
-restaurant.db
+# Track restaurant.db for demo deployment
 *.db
+!restaurant.db
 
 # IDE files
 .vscode/
@@ -22,13 +22,9 @@ restaurant.db
 .DS_Store
 Thumbs.db
 
-# Python cache / test
+# Test/cache files
 .pytest_cache/
 .mypy_cache/
 
 # Logs
 *.log
-
-# Uploaded files (optional)
-static/uploads/*
-!static/uploads/.gitkeep
