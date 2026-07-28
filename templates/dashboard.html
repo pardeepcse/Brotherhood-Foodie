@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <h1>
+        👋 Welcome {{ user.name }}
+    </h1>
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+            <h2>{{ my_orders|length }}</h2>
+            <p>My Orders</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>{{ my_reviews }}</h2>
+            <p>My Reviews</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <h2>Recent Orders</h2>
+
+    <table border="1" cellpadding="10" width="100%">
+
+        <tr>
+            <th>Order ID</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+
+        {% for order in my_orders %}
+
+        <tr>
+
+            <td>#{{ order.id }}</td>
+
+            <td>₹{{ order.total }}</td>
+
+            <td>
+
+                {% if order.status == "Pending" %}
+                <span style="color:#ff9800;font-weight:bold;">
+                    🟡 Pending
+                </span>
+
+                {% elif order.status == "Preparing" %}
+                <span style="color:#2196F3;font-weight:bold;">
+                    👨‍🍳 Preparing
+                </span>
+
+                {% elif order.status == "Out for Delivery" %}
+                <span style="color:#9C27B0;font-weight:bold;">
+                    🚚 Out for Delivery
+                </span>
+
+                {% elif order.status == "Completed" %}
+                <span style="color:green;font-weight:bold;">
+                    ✅ Completed
+                </span>
+
+                {% elif order.status == "Cancelled" %}
+                <span style="color:red;font-weight:bold;">
+                    ❌ Cancelled
+                </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>{{ order.created_at.strftime("%d-%m-%Y") }}</td>
+
+            <td>
+
+                <a href="{{ url_for('order_details', order_id=order.id) }}" class="btn">
+                    View Details
+                </a>
+
+                &nbsp;
+
+
+                <a href="{{ url_for('invoice', order_id=order.id) }}" target="_blank" class="btn">
+                    Download Invoice
+                </a>
+            </td>
+
+        </tr>
+
+        {% else %}
+
+        <tr>
+            <td colspan="4">
+                No Orders Found
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</section>
+
+{% endblock %}

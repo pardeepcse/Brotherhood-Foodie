@@ -1,0 +1,46 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h2>Customer Reviews</h2>
+
+<table>
+
+    <tr>
+        <th>Food</th>
+        <th>User</th>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>Action</th>
+    </tr>
+
+    {% for review in reviews %}
+
+    <tr>
+
+        <td>{{ review.food.name }}</td>
+
+        <td>{{ review.user.name }}</td>
+
+        <td>⭐ {{ review.rating }}/5</td>
+
+        <td>{{ review.comment }}</td>
+
+        <td>
+
+            <a href="{{ url_for('delete_review', review_id=review.id) }}" class="btn"
+                onclick="return confirm('Delete this review?')">
+
+                Delete
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

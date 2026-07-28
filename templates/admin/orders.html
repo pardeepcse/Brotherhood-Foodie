@@ -1,0 +1,99 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h2>All Orders</h2>
+
+<table border="1" cellpadding="10" width="100%">
+
+    <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for order in orders %}
+
+    <tr>
+
+        <td>{{ order.id }}</td>
+
+        <td>{{ order.customer }}</td>
+
+        <td>{{ order.phone }}</td>
+
+        <td>{{ order.address }}</td>
+
+        <td>₹{{ order.total }}</td>
+
+        <td>
+
+            {% if order.status == "Pending" %}
+            <span style="color:orange;font-weight:bold;">🟡 Pending</span>
+
+            {% elif order.status == "Preparing" %}
+            <span style="color:blue;font-weight:bold;">👨‍🍳 Preparing</span>
+
+            {% elif order.status == "Out for Delivery" %}
+            <span style="color:purple;font-weight:bold;">🚚 Out for Delivery</span>
+
+            {% elif order.status == "Completed" %}
+            <span style="color:green;font-weight:bold;">✅ Delivered</span>
+
+            {% elif order.status == "Cancelled" %}
+            <span style="color:red;font-weight:bold;">❌ Cancelled</span>
+
+            {% endif %}
+
+        </td>
+
+        <td>{{ order.created_at.strftime("%d-%m-%Y") }}</td>
+        <td class="action-buttons">
+
+            <a class="status-btn pending"
+                href="{{ url_for('update_order_status', order_id=order.id, status='Pending') }}">
+                Pending
+            </a>
+
+            <a class="status-btn preparing"
+                href="{{ url_for('update_order_status', order_id=order.id, status='Preparing') }}">
+                Preparing
+            </a>
+
+            <a class="status-btn delivery"
+                href="{{ url_for('update_order_status', order_id=order.id, status='Out for Delivery') }}">
+                Delivery
+            </a>
+
+            <a class="status-btn complete"
+                href="{{ url_for('update_order_status', order_id=order.id, status='Completed') }}">
+                Complete
+            </a>
+
+            <a class="status-btn cancel"
+                href="{{ url_for('update_order_status', order_id=order.id, status='Cancelled') }}">
+                Cancel
+            </a>
+
+            <br><br>
+
+            <a class="delete-btn" href="{{ url_for('delete_order', order_id=order.id) }}"
+                onclick="return confirm('Delete this order?')">
+                Delete
+            </a>
+
+        </td>
+
+    </tr>
+
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

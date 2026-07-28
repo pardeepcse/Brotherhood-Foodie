@@ -1,0 +1,71 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h2 style="margin:20px 0;">📩 Contact Messages</h2>
+
+<table>
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for contact in contacts %}
+
+    <tr>
+
+        <td>{{ contact.id }}</td>
+
+        <td>{{ contact.name }}</td>
+
+        <td>{{ contact.email }}</td>
+
+        <td>{{ contact.subject }}</td>
+
+        <td>{{ contact.message }}</td>
+
+        <td>
+            {% if contact.replied %}
+                <span style="color:green;font-weight:bold;">
+                    Replied
+                </span>
+            {% else %}
+                <span style="color:red;font-weight:bold;">
+                    Pending
+                </span>
+            {% endif %}
+        </td>
+
+        <td>{{ contact.created_at.strftime("%d-%m-%Y") }}</td>
+
+        <td>
+
+            <a class="btn2"
+               href="{{ url_for('reply_contact', id=contact.id) }}">
+                Reply
+            </a>
+
+            |
+
+            <a class="btn2"
+               href="{{ url_for('delete_contact', id=contact.id) }}"
+               onclick="return confirm('Delete this message?')">
+                Delete
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

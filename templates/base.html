@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Brotherhood Foodie</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+    <div id="overlay"></div>
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Brotherhood Foodie
+            </div>
+
+            <!-- Hamburger Button -->
+            <div class="menu-toggle" id="menu-toggle">
+                ☰
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-menu" id="nav-menu">
+
+                <ul class="nav-links">
+
+                    <li><a href="/">Home</a></li>
+
+                    <li><a href="/about">About</a></li>
+
+                    <li><a href="/menu">Menu</a></li>
+
+                    <li>
+                        <a href="{{ url_for('gallery') }}">
+                            Gallery
+                        </a>
+                    </li>
+
+                    <li>
+
+                        <a href="{{ url_for('home') }}#contact">
+                            Contact
+                        </a>
+
+                    <li>
+                        <a href="{{ url_for('cart') }}">
+                            🛒 Cart ({{ cart_count }})
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="nav-buttons">
+
+                    {% if current_user.is_authenticated %}
+
+                    <span class="welcome-user">
+                        Welcome {{ current_user.name }}
+                    </span>
+
+                    {% if current_user.role == "admin" %}
+                    <a href="{{ url_for('admin_dashboard') }}" class="btn2">
+                        Dashboard
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('dashboard') }}" class="btn2">
+                        Dashboard
+                    </a>
+                    {% endif %}
+
+                    <a href="{{ url_for('logout') }}" class="btn2">
+                        Logout
+                    </a>
+
+                    {% else %}
+
+                    <a href="{{ url_for('login') }}" class="btn">
+                        Login
+                    </a>
+
+                    <a href="{{ url_for('register') }}" class="btn2">
+                        Register
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+    <div class="flash-container">
+
+        {% for category, message in messages %}
+
+        <div class="flash {{ category }}" id="flashMessage">
+
+            {{ message }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <script>
+
+        setTimeout(function () {
+
+            let flash = document.getElementById("flashMessage");
+
+            if (flash) {
+
+                flash.style.opacity = "0";
+
+                flash.style.transform = "translateY(-20px)";
+
+                setTimeout(function () {
+
+                    flash.remove();
+
+                }, 500);
+
+            }
+
+        }, 2000);
+
+    </script>
+
+    {% endif %}
+
+    {% endwith %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer>
+
+        <div class="footer">
+
+            <h2>Brotherhood Foodie</h2>
+
+            <p>
+
+                Fresh Food • Fast Delivery • Best Quality
+
+            </p>
+
+            <p>
+
+                © 2026 Brotherhood Foodie. All Rights Reserved.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script>
+
+        const toggle = document.getElementById("menu-toggle");
+
+        const menu = document.getElementById("nav-menu");
+
+        const overlay = document.getElementById("overlay");
+
+        toggle.onclick = function () {
+
+            menu.classList.toggle("active");
+
+            overlay.classList.toggle("show");
+
+            toggle.innerHTML = menu.classList.contains("active") ? "✕" : "☰";
+
+        }
+
+        overlay.onclick = function () {
+
+            menu.classList.remove("active");
+
+            overlay.classList.remove("show");
+
+            toggle.innerHTML = "☰";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

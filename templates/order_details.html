@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <h2>Order Details</h2>
+
+    <br>
+
+    <table border="1" cellpadding="10" width="100%">
+
+        <tr>
+            <th>Order ID</th>
+            <td>#{{ order.id }}</td>
+        </tr>
+
+        <tr>
+            <th>Customer</th>
+            <td>{{ order.customer }}</td>
+        </tr>
+
+        <tr>
+            <th>Phone</th>
+            <td>{{ order.phone }}</td>
+        </tr>
+
+        <tr>
+            <th>Address</th>
+            <td>{{ order.address }}</td>
+        </tr>
+
+        <tr>
+            <th>Status</th>
+            <td>{{ order.status }}</td>
+        </tr>
+
+        <tr>
+            <th>Total</th>
+            <td>₹{{ order.total }}</td>
+        </tr>
+
+    </table>
+
+    <br><br>
+
+    <h3>Ordered Foods</h3>
+
+    <table border="1" cellpadding="10" width="100%">
+
+        <tr>
+
+            <th>Food</th>
+
+            <th>Price</th>
+
+            <th>Quantity</th>
+
+            <th>Subtotal</th>
+
+        </tr>
+
+        {% for item in order.items %}
+
+        <tr>
+
+            <td>{{ item.food.name }}</td>
+
+            <td>₹{{ item.price }}</td>
+
+            <td>{{ item.quantity }}</td>
+
+            <td>₹{{ item.price * item.quantity }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br>
+
+    <a href="{{ url_for('dashboard') }}" class="btn">
+        ← Back
+    </a>
+
+</section>
+
+{% endblock %}

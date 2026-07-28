@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="text-align:center;padding:100px 20px;">
+
+    <h1 style="font-size:80px;color:#dc3545;">
+        500
+    </h1>
+
+    <h2>
+        Internal Server Error
+    </h2>
+
+    <p>
+        Something went wrong on the server.
+        Please try again later.
+    </p>
+
+    <br>
+
+    <a href="{{ url_for('home') }}" class="btn">
+        Go Back Home
+    </a>
+
+</div>
+
+{% endblock %}

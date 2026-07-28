@@ -1,0 +1,476 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="overlay">
+
+        <div class="hero-content">
+
+            <h1>
+
+                Delicious Food For Everyone
+
+            </h1>
+
+            <p>
+
+                Fresh ingredients, amazing taste and unforgettable dining experience.
+
+            </p>
+
+            <a href="#featured-foods" class="btn">
+                Order Now
+            </a>
+
+            <a href="{{ url_for('menu') }}" class="btn2">
+                View Menu
+            </a>
+
+        </div>
+
+    </div>
+
+    </div>
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about">
+
+    <div class="about-image">
+
+        <img src="{{ url_for('static', filename='images/chef.jpg') }}" alt="Chef">
+
+    </div>
+
+    <div class="about-content">
+
+        <h2>About Brotherhood Foodie</h2>
+
+        <p>
+
+            Brotherhood Foodie is dedicated to serving fresh, delicious, and
+            hygienic food made with premium ingredients. Our chefs prepare every
+            meal with passion to provide the best dining experience.
+
+        </p>
+
+        <a href="{{ url_for('about_details') }}" class="btn">
+            Read More
+        </a>
+    </div>
+
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+
+<section class="why">
+
+    <h2>Why Choose Us</h2>
+
+    <div class="why-container">
+
+        <div class="box">
+
+            <h3>Fresh Food</h3>
+
+            <p>
+
+                Daily prepared using fresh ingredients.
+
+            </p>
+
+        </div>
+
+        <div class="box">
+
+            <h3>Fast Delivery</h3>
+
+            <p>
+
+                Get your food delivered quickly.
+
+            </p>
+
+        </div>
+
+        <div class="box">
+
+            <h3>Expert Chefs</h3>
+
+            <p>
+
+                Highly experienced professional chefs.
+
+            </p>
+
+        </div>
+
+        <div class="box">
+
+            <h3>Best Quality</h3>
+
+            <p>
+
+                Premium quality food at affordable prices.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="categories" id="categories">
+
+    <h2 style="text-align: center;">Categories</h2>
+    <!-- <h3>Total Categories: {{ categories|length }}</h3> -->
+
+    <div class="category-container">
+
+        {% for category in categories %}
+
+        <div class="category-card">
+
+            <a href="{{ url_for('category_menu', category_id=category.id) }}"
+                style="text-decoration:none; color:inherit;">
+
+                {% if category.image %}
+                <img src="{{ url_for('static', filename='uploads/categories/' + category.image) }}"
+                    alt="{{ category.name }}">
+
+                {% else %}
+                <img src="{{ url_for('static', filename='images/no-image.png') }}" alt="No Image">
+
+                {% endif %}
+
+                <h3>{{ category.name }}</h3>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- ================= POPULAR MENU ================= -->
+
+
+
+<section class="featured-foods" id="featured-foods">
+
+    <h2>🔥 Featured Foods</h2>
+
+    <div class="menu-container">
+
+        {% for food in foods %}
+
+        <div class="food-card">
+
+            <img src="{{ url_for('static', filename='uploads/foods/' + food.image) }}" alt="{{ food.name }}">
+
+            <div class="food-info">
+
+                <span class="category-badge">
+                    {{ food.category.name }}
+                </span>
+
+                <h3>{{ food.name }}</h3>
+
+                <p>{{ food.description }}</p>
+
+                {% if food.discount > 0 %}
+
+                <p class="price">
+
+                    ₹{{ food.discounted_price() }}
+
+                    <del>₹{{ food.price }}</del>
+
+                </p>
+
+                {% else %}
+
+                <p class="price">
+
+                    ₹{{ food.price }}
+
+                </p>
+
+                {% endif %}
+
+                <a href="{{ url_for('add_to_cart', food_id=food.id) }}" class="btn">
+                    Add to Cart
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- ================= TODAY'S SPECIAL ================= -->
+
+<section class="offer">
+
+    <div class="offer-text">
+
+        <h2>Today's Special Offer</h2>
+
+        <h3>Buy 2 Pizzas & Get 1 Free</h3>
+
+        <p>
+
+            Enjoy our delicious pizza combo with exciting offers.
+
+        </p>
+
+        <a href="{{ url_for('add_special_offer') }}" class="btn">
+            Order Now
+        </a>
+
+    </div>
+
+    <div class="offer-image">
+
+        <img src="{{ url_for('static', filename='images/offer.jpg') }}">
+
+    </div>
+
+</section>
+
+<!-- ================= DISCOUNT BANNER ================= -->
+
+<section class="discount">
+
+    <h2>
+
+        🔥 Flat 20% OFF Today 🔥
+
+    </h2>
+
+    <p>
+
+        Use Coupon Code
+
+        <strong>FOODIE20</strong>
+
+    </p>
+
+</section>
+
+<!-- ================= GALLERY ================= -->
+
+<section class="gallery">
+
+    <h2>Food Gallery</h2>
+
+    <div class="gallery-container">
+
+        {% for image in gallery_images %}
+
+        <img src="{{ url_for('static', filename='uploads/gallery/' + image.image) }}" alt="{{ image.title }}">
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- ================= CUSTOMER REVIEWS ================= -->
+
+<section class="reviews" id="review">
+
+    <h2>What Our Customers Say</h2>
+
+    <div class="review-container">
+
+        {% if customer_reviews %}
+
+            {% for review, user, food in customer_reviews %}
+
+                <div class="review-card">
+
+                    <!-- Customer Name First Letter -->
+                    <div class="review-avatar">
+                        {{ user.name[0] | upper }}
+                    </div>
+
+                    <!-- Customer Name -->
+                    <h3>{{ user.name }}</h3>
+
+                    <!-- Rating Stars -->
+                    <div class="review-stars">
+
+                        {% for star in range(1, 6) %}
+
+                            {% if star <= review.rating | int %}
+                                <span class="filled-star">★</span>
+                            {% else %}
+                                <span class="empty-star">★</span>
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- Review Comment -->
+                    <p class="review-comment">
+                        “{{ review.comment }}”
+                    </p>
+
+                    <!-- Food Name -->
+                    <small class="review-food">
+                        Review for:
+                        <strong>{{ food.name }}</strong>
+                    </small>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="no-reviews">
+
+                <h3>No Customer Reviews Yet</h3>
+
+                <p>
+                    Be the first customer to review our food.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+    <h2>Contact Us</h2>
+
+    <div class="contact-container">
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+
+            <h3>Brotherhood Foodie</h3>
+
+            <p>📍 Abohar, Punjab</p>
+
+            <p>
+                📞 +91 77197-41002, 89493-43446
+            </p>
+
+            <p>
+                ✉ support@brotherhoodfoodie.com
+            </p>
+
+            <p>
+                🕒 10:00 AM - 11:00 PM
+            </p>
+
+        </div>
+
+        <!-- Working Contact Form -->
+        <div class="contact-form">
+
+            <form method="POST" action="{{ url_for('contact') }}">
+
+                {{ form.hidden_tag() }}
+
+                <!-- Name -->
+                <div class="form-group">
+
+                    {{ form.name(
+                    class="form-control",
+                    placeholder="Your Name"
+                    ) }}
+
+                    {% for error in form.name.errors %}
+                    <small class="form-error">
+                        {{ error }}
+                    </small>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    {{ form.email(
+                    class="form-control",
+                    placeholder="Your Email"
+                    ) }}
+
+                    {% for error in form.email.errors %}
+                    <small class="form-error">
+                        {{ error }}
+                    </small>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Subject -->
+                <div class="form-group">
+
+                    {{ form.subject(
+                    class="form-control",
+                    placeholder="Subject"
+                    ) }}
+
+                    {% for error in form.subject.errors %}
+                    <small class="form-error">
+                        {{ error }}
+                    </small>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Message -->
+                <div class="form-group">
+
+                    {{ form.message(
+                    class="form-control",
+                    rows="5",
+                    placeholder="Write minimum 10 characters"
+                    ) }}
+
+                    {% for error in form.message.errors %}
+                    <small class="form-error">
+                        {{ error }}
+                    </small>
+                    {% endfor %}
+
+                </div>
+
+                {{ form.submit(
+                class="btn"
+                ) }}
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}

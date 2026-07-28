@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/verify_otp.css') }}">
+
+<div class="verify-otp-wrapper">
+
+    <div class="verify-otp-card">
+
+        <h2>Verify OTP</h2>
+
+        <p>
+            Enter the 6-digit OTP sent to your registered email.
+        </p>
+
+        <form method="POST">
+
+            {{ form.hidden_tag() }}
+
+            <div class="verify-otp-group">
+
+                {{ form.otp.label }}
+
+                {{ form.otp(
+                    class="verify-otp-input",
+                    placeholder="Enter OTP"
+                ) }}
+
+            </div>
+
+            {{ form.submit(
+                class="verify-otp-btn"
+            ) }}
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

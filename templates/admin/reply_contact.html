@@ -1,0 +1,47 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h2>Reply Contact Message</h2>
+
+<br>
+
+<table>
+
+    <tr>
+        <td><b>Name</b></td>
+        <td>{{ contact.name }}</td>
+    </tr>
+
+    <tr>
+        <td><b>Email</b></td>
+        <td>{{ contact.email }}</td>
+    </tr>
+
+    <tr>
+        <td><b>Subject</b></td>
+        <td>{{ contact.subject }}</td>
+    </tr>
+
+    <tr>
+        <td><b>Message</b></td>
+        <td>{{ contact.message }}</td>
+    </tr>
+
+</table>
+
+<br>
+
+<form method="POST">
+
+    <textarea name="reply" rows="8" style="width:100%;" required>{{ contact.admin_reply or "" }}</textarea>
+
+    <br><br>
+
+    <button type="submit" class="btn">
+        Send Reply
+    </button>
+
+</form>
+
+{% endblock %}

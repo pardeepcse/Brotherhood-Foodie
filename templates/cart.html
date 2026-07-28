@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-banner">
+    <h1>My Cart</h1>
+</section>
+
+<div class="page-content">
+
+    {% if cart_items %}
+
+    <table>
+
+        <tr>
+            <th>Food</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Action</th>
+        </tr>
+
+        {% for item in cart_items %}
+
+        <tr>
+
+            <td>{{ item.food.name }}</td>
+
+            <td>₹{{ item.food.discounted_price() }}</td>
+
+            <td>
+
+                <a href="{{ url_for('decrease_quantity', food_id=item.food.id) }}" class="btn">-</a>
+
+                {{ item.qty }}
+
+                <a href="{{ url_for('increase_quantity', food_id=item.food.id) }}" class="btn">+</a>
+
+            </td>
+
+            <td>₹{{ item.subtotal }}</td>
+
+            <td>
+
+                <a href="{{ url_for('remove_from_cart', food_id=item.food.id) }}" class="btn"
+                    onclick="return confirm('Remove this item from cart?')">
+
+                    Remove
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <h2 style="margin-top:20px;">
+        Total : ₹{{ total }}
+    </h2>
+
+    <br><br>
+
+    <a href="{{ url_for('clear_cart') }}" class="btn"
+        onclick="return confirm('Are you sure you want to clear the cart?')">
+        Empty Cart
+    </a>
+
+    <a href="{{ url_for('checkout') }}" class="btn" style="margin-left:15px;">
+        Proceed to Checkout
+    </a>
+
+    {% else %}
+
+    <h2>Your cart is empty.</h2>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

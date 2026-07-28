@@ -1,0 +1,56 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h2>Edit Food</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    {{ form.hidden_tag() }}
+
+    <label>Category</label>
+    {{ form.category(class="form-control") }}
+
+    <label>Food Name</label>
+    {{ form.name(class="form-control") }}
+
+    <label>Description</label>
+    {{ form.description(class="form-control", rows="4") }}
+
+    <label>Price</label>
+    {{ form.price(class="form-control") }}
+
+    <label>Discount (%)</label>
+    {{ form.discount(class="form-control") }}
+
+    <label>Current Image</label>
+    <br>
+
+    {% if food.image %}
+        <img src="{{ url_for('static', filename='uploads/foods/' + food.image) }}"
+             width="150">
+    {% else %}
+        <p>No Image</p>
+    {% endif %}
+
+    <br><br>
+
+    <label>Change Image</label>
+    {{ form.image(class="form-control") }}
+
+    <br>
+
+    {{ form.available() }}
+    Available
+
+    <br><br>
+
+    {{ form.submit(class="btn") }}
+
+    <a href="{{ url_for('foods') }}" class="btn">
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}

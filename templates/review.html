@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-banner">
+    <h1>Review - {{ food.name }}</h1>
+</section>
+
+<div class="page-content">
+
+<form method="POST">
+
+    {{ form.hidden_tag() }}
+
+    <label>Rating</label>
+    {{ form.rating(class="form-control") }}
+
+    <br>
+
+    <label>Review</label>
+    {{ form.comment(class="form-control", rows="5") }}
+
+    <br><br>
+
+    {{ form.submit(class="btn") }}
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-banner">
+    <div style="width:100%;margin:20px auto;display:flex;justify-content:space-between;align-items:center; position: relative; top: 11px; left: -15px;">
+
+        <a href="{{ url_for('home') }}#categories" class="btn">
+            ← Back to Categories
+        </a>
+
+        {% if category %}
+        <h2>{{ category.name }}</h2>
+        {% endif %}
+
+    </div>
+    <h1>Our Delicious Menu</h1>
+    <p>Choose your favorite food and order now.</p>
+</section>
+
+<section class="menu-section">
+
+    <div class="menu-container">
+        <h2>Total Foods: {{ foods|length }}</h2>
+
+        {% for food in foods %}
+
+        <div class="food-card">
+
+            <img src="{{ url_for('static', filename='uploads/foods/' + food.image) }}" alt="{{ food.name }}">
+
+            <div class="food-info">
+
+                <h3>{{ food.name }}</h3>
+
+                <p>{{ food.description }}</p>
+
+                <span class="category-badge">
+                    {{ food.category.name }}
+                </span>
+
+                {% if food.discount > 0 %}
+
+                <p class="price">
+                    ₹{{ food.discounted_price() }}
+                    <del>₹{{ food.price }}</del>
+                </p>
+
+                <span class="discount">
+                    {{ food.discount }}% OFF
+                </span>
+
+                {% else %}
+
+                <p class="price">
+                    ₹{{ food.price }}
+                </p>
+
+                {% endif %}
+
+                <div class="food-buttons">
+
+                    <a href="{{ url_for('add_to_cart', food_id=food.id) }}" class="btn">
+                        Add to Cart
+                    </a>
+
+                    <a href="{{ url_for('review', food_id=food.id) }}" class="btn2">
+                        Review
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

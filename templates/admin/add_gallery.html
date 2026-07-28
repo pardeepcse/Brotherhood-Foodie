@@ -1,0 +1,25 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h2>Add Gallery Image</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    {{ form.hidden_tag() }}
+
+    <label>Image Title</label>
+    {{ form.title(class="form-control") }}
+
+    <br>
+
+    <label>Select Image</label>
+    {{ form.image(class="form-control") }}
+
+    <br>
+
+    {{ form.submit(class="btn btn-success") }}
+
+</form>
+
+{% endblock %}

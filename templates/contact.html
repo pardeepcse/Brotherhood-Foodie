@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-banner">
+    <h1>Contact Us</h1>
+    <p>We would love to hear from you.</p>
+</div>
+
+<section class="contact">
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+
+            <h3>Brotherhood Foodie</h3>
+
+            <p>📍 Abohar, Punjab</p>
+
+            <p>
+                📞 +91 77197-41002,
+                89493-43446
+            </p>
+
+            <p>
+                ✉ support@brotherhoodfoodie.com
+            </p>
+
+            <p>
+                🕒 10:00 AM - 11:00 PM
+            </p>
+
+        </div>
+
+        <div class="contact-form">
+
+            <form method="POST" action="{{ url_for('contact') }}">
+
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+
+                    {{ form.name(
+                    class="form-control",
+                    placeholder="Your Name"
+                    ) }}
+
+                    {% for error in form.name.errors %}
+                    <small class="form-error">
+                        {{ error }}
+                    </small>
+                    {% endfor %}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form.email(
+                    class="form-control",
+                    placeholder="Your Email"
+                    ) }}
+
+                    {% for error in form.email.errors %}
+                    <small class="form-error">
+                        {{ error }}
+                    </small>
+                    {% endfor %}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form.subject(
+                    class="form-control",
+                    placeholder="Subject"
+                    ) }}
+
+                    {% for error in form.subject.errors %}
+                    <small class="form-error">
+                        {{ error }}
+                    </small>
+                    {% endfor %}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form.message(
+                    class="form-control",
+                    rows="5",
+                    placeholder="Write minimum 10 characters"
+                    ) }}
+
+                    {% for error in form.message.errors %}
+                    <small class="form-error">
+                        {{ error }}
+                    </small>
+                    {% endfor %}
+
+                </div>
+
+                {{ form.submit(
+                class="btn"
+                ) }}
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

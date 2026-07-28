@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Brotherhood Foodie</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+
+<body>
+
+
+    <div class="admin-container">
+
+        <div class="sidebar">
+
+            <h2>Admin Panel</h2>
+
+            <ul>
+
+                <li>
+                    <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('categories') }}">Categories</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('add_category') }}">Add Category</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('foods') }}">Foods</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('add_food') }}">Add Food</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('gallery_list') }}">Gallery</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('add_gallery') }}">Add Gallery</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('orders') }}">Orders</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('reviews') }}">Reviews</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('contacts') }}">
+                        📩 Contact Messages
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="content">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="padding:40px; margin-top: 22px;">
+
+    <h1 style="text-align:center; margin-bottom:30px;">
+        Admin Dashboard
+    </h1>
+
+    <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
+
+        <div
+            style="width:220px; padding:25px; background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.2); text-align:center;">
+            <h2>{{ total_categories }}</h2>
+            <p>Total Categories</p>
+        </div>
+
+        <div
+            style="width:220px; padding:25px; background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.2); text-align:center;">
+            <h2>{{ total_foods }}</h2>
+            <p>Total Foods</p>
+        </div>
+
+        <div
+            style="width:220px; padding:25px; background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.2); text-align:center;">
+            <h2>{{ total_gallery }}</h2>
+            <p>Gallery Images</p>
+        </div>
+
+        <div
+            style="width:220px; padding:25px; background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.2); text-align:center;">
+            <h2>{{ total_users }}</h2>
+            <p>Total Users</p>
+        </div>
+
+        <div
+            style="width:220px; padding:25px; background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.2); text-align:center;">
+            <h2>{{ total_orders }}</h2>
+            <p>Total Orders</p>
+        </div>
+
+    </div>
+
+</div>
+
+<hr>
+
+<div style="text-align:center; margin: top 70px; position: relative; top: 35px;">
+
+    <a href="{{ url_for('admin_panel') }}" class="btn">
+        Manage Admin Panel
+    </a>
+
+</div>
+
+{% endblock %}

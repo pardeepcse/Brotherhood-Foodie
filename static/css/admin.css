@@ -1,0 +1,253 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+.admin-container{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:250px;
+    background:#222;
+    color:white;
+    padding:20px;
+}
+
+.sidebar h2{
+    text-align:center;
+    margin-bottom:30px;
+    position: fixed;
+    bottom: 87.1%;
+    left: 2.2%;
+}
+
+.sidebar ul{
+    list-style: disclosure-closed;
+    position: fixed;
+    left: 3.1%;
+    top: 65px;
+}
+
+.sidebar ul li{
+    margin:15px 0;
+}
+
+.sidebar ul li a{
+    color:white;
+    text-decoration:none;
+    display:block;
+    padding:10px;
+    border-radius:5px;
+}
+
+.sidebar ul li a:hover{
+    background:#ff6600;
+}
+
+.content{
+    flex:1;
+    padding:30px;
+    background:white;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table th,
+table td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+table th{
+    background:#ff6600;
+    color:white;
+}
+
+.btn{
+    display:inline-block;
+    background:#ff6600;
+    color:white;
+    padding:10px 20px;
+    text-decoration:none;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#e65c00;
+}
+.btn2{
+ display: inline-block;
+  background: #ff6b35;
+  color: #fff;
+  padding: 6px 10px;
+  border: 2px solid black;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  transition: .3s;
+}
+/* ====================================== */
+
+.action-buttons{
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    white-space:nowrap;
+}
+
+.btn-edit,
+.btn-delete{
+    display:inline-block;
+    background: #ff6b35;
+    color:#fff;
+    width:70px;
+    padding:8px 0;
+    text-align:center;
+    text-decoration:none;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+/* .btn-edit{
+    display:inline-block;
+    background: #ff6b35;
+    color:#fff;
+    padding:8px 18px;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-right:8px;
+} */
+
+.btn-edit:hover,
+.btn-delete:hover{
+    background:#e65c00;
+    opacity:.9;
+}
+
+/* .btn-delete{
+    display:inline-block;
+    background:#ff6b35;
+    color:#fff;
+    padding:8px 18px;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+} */
+
+/* .btn-delete:hover{
+    background:#dc3545;
+} */
+
+
+
+
+
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+img{
+    border-radius:5px;
+}
+
+ .dashboard{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+    margin:40px 0;
+}
+
+.card{
+    width:220px;
+    background:#fff;
+    border-radius:12px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h2{
+    font-size:40px;
+    color:#ff6b35;
+    margin-bottom:10px;
+}
+
+.card p{
+    font-size:20px;
+    font-weight:bold;
+} 
+
+/* ===============order status=================== */
+.action-buttons{
+    text-align:center;
+}
+
+.status-btn{
+    display:inline-block;
+    margin:3px;
+    padding:6px 12px;
+    border-radius:6px;
+    text-decoration:none;
+    color:#fff;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.pending{
+    background:#f39c12;
+}
+
+.preparing{
+    background:#3498db;
+}
+
+.delivery{
+    background:#9b59b6;
+}
+
+.complete{
+    background:#27ae60;
+}
+
+.cancel{
+    background:#e74c3c;
+}
+
+.delete-btn{
+    display:inline-block;
+    padding:7px 14px;
+    background:#222;
+    color:#fff;
+    text-decoration:none;
+    border-radius:6px;
+}

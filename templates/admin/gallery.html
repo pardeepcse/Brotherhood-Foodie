@@ -1,0 +1,54 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h2>Gallery Management</h2>
+
+<br>
+
+<a href="{{ url_for('add_gallery') }}" class="btn">
+    + Add New Image
+</a>
+
+<br><br>
+
+<table border="1" cellpadding="10" width="100%">
+
+    <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Action</th>
+    </tr>
+
+    {% for image in galleries %}
+
+    <tr>
+
+        <td>{{ image.id }}</td>
+
+        <td>
+            <img src="{{ url_for('static', filename='uploads/gallery/' + image.image) }}"
+                 width="120">
+        </td>
+
+        <td>{{ image.title }}</td>
+
+        <td>
+
+            <a  class="btn2"  href="{{ url_for('delete_gallery', id=image.id) }}"
+               onclick="return confirm('Delete this image?')">
+
+                Delete
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
