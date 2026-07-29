@@ -167,7 +167,6 @@ def create_default_admins():
         email = admin_data["email"]
         password = admin_data["password"]
 
-        # Environment variable missing ho to skip
         if not email or not password:
             continue
 
